@@ -2,6 +2,7 @@
 	"description": ".",
 	"respository": ".",
 	"dependencies": {
-		"irc": "*"
+		"irc": "*",
+        "underscore": "*"
 	}
 }

@@ -1,4 +1,6 @@
 var irc = require('irc');
+var words = require('./words');
+var _ = require('underscore');
 
 var bot = new irc.Client('irc.freenode.net', 'eric_blargh', {
     debug: true,
@@ -17,7 +19,13 @@ bot.addListener('message', function (from, to, message) {
     console.log('%s => %s: %s', from, to, message);
 
     if ( to.match(/^[#&]/) ) {
-    	bot.say(to, "IRC is stupid, but at least its easy to do shit like this");
+
+        var number = message.split(' ').length;
+        var badWords = _.sample(words, number);
+        var returnMessage = badWords.join(' ');
+        bot.say(to, returnMessage);
+
+//    	bot.say(to, "IRC is stupid, but at least its easy to do shit like this");
         // // channel message
         // if ( message.match(/hello/i) ) {
         //     bot.say(to, 'Hello there ' + from);
